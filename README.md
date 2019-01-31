@@ -1,2 +1,2 @@
 # bamazon
-Amazon-like storefront with MySQL
+ Amazon-like storefront with MySQL

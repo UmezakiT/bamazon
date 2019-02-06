@@ -61,14 +61,12 @@ function startPrompt() {
 };
 
 
-// if(pick.item.stock_quantity < pick.quantity){
-//   console.log("Insufficient Quantity!");
-// }else{
-//   let quantity = pick.item.stock_quantity - pick.quantity;
-//   let cost = pick.quantity * pick.item.price;
-//   updateProducts(quantity, pick.item.item_id, cost);
-// }
-// });
+function checkAmount(){
+
+  connection.query("SELECT item_id, sotkc_quantity FROM products WHERE ?", )
+
+}
+
 
 
 

@@ -1,8 +1,8 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
-// require("dotenv").config();
-require('dotenv').config();
+require("dotenv").config();
+
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -37,17 +37,38 @@ function startPrompt() {
     if (err) throw err;
 
   inquirer
-    .prompt([{
+    .prompt([
+      {
       name: "itemID",
       message: "Enter the product's ID you're interested in.",
-    }, {
+      }, 
+      {
       name: "units",
-      message: "How many units would you like to purchase?"
-    }]).then(function (res) {
-      console.log(res.itemID, res.units);
+      message: "How many units would you like to purchase?",
+      validate: function(a){
+        if(a.itemID.stock_quantity < a.units){
+          console.log("The inventory shows less than the amount you placed. You must start over ");
+          startPrompt();
+        };
+        // return !NaN(a);
+      }
+      }]).then(function (res) {
+      // let query = "SELECT item_id FROM products WHERE ?";
+      // connection.query(query, {product_name:res.product_name})
+      console.log(res.product_name, res.units);
     });
   })
 };
+
+
+// if(pick.item.stock_quantity < pick.quantity){
+//   console.log("Insufficient Quantity!");
+// }else{
+//   let quantity = pick.item.stock_quantity - pick.quantity;
+//   let cost = pick.quantity * pick.item.price;
+//   updateProducts(quantity, pick.item.item_id, cost);
+// }
+// });
 
 
 
